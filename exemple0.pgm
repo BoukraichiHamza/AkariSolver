@@ -1,0 +1,14 @@
+P2
+# nb_colonnes nb_lignes
+5 5
+# nb de 'couleurs'
+6          
+# grille encodee
+# 0   = vide
+# 1   = noir sans indication
+# n+2 = noir avec indication n
+0 0 0 0 0
+0 6 0 1 0
+0 0 0 4 0
+2 0 1 0 0
+0 0 0 0 0

@@ -1,0 +1,72 @@
+PROJET CAML 2016
+
+Description des fichiers fournis dans l'archive :
+-------------------------------------------------
+
+- akari_principal.cmo   : implantation compilée du module 'Akari_principal',
+                             qui sert de programme principal.
+- case.mli                 : fichier source interface contenant les définitions des cases.
+- case.cmi                 : interface compilée du module 'Case'.
+- case.cmo                 : implantation compilée du module 'Case'.
+- memo.mli                 : fichier source interface contenant les fonctions de memoization.
+- memo.cmi                 : interface compilée du module 'Memo'.
+- memo.cmo                 : implantation compilée du module 'Memo'.
+- bdd_base.mli             : fichier source interface contenant les fonctions de base sur les BDD.
+- bdd_base.cmi             : interface compilée du module 'Bdd_base'.
+- bdd_base.cmo             : implantation compilée du module 'Bdd_base'.
+- akari_solveur.mli     : fichier source interface du module principal contenant les déclarations 
+                             devant être implantées.
+- script_affichage.ml      : un script OCaml qui permet l'affichage des cases et des BDD directement
+                             dans l'interprète. Utile au débogage.
+- fibonacci_memo.ml        : un fichier exemple qui montre comment transformer une fonction ordinaire
+                             en fonction memoizée beaucoup plus efficace en temps,
+                             illustré sur la célèbre suite de Fibonacci.
+- exemple1.pgm             : fichier texte au format PGM contenant une description de grille pouvant
+                             être utilisée par l'application principale.
+                             Utile au test et au débogage.
+
+Utilisation des fichiers fournis :
+----------------------------------
+
+A) Accéder aux définitions contenues dans les modules 'Case', 'Memo' et 'Bdd_base' :
+   ---------------------------------------------------------------------------------
+
+   a) Soit par préfixage :
+
+       let c = Case.make 1 2;;
+
+   b) Soit en ouvrant au préalable l'interface du module :
+       
+       open Case;;
+       ...
+       let c = make 1 2;;
+
+
+B) Compiler une application principale :
+   -------------------------------------
+
+   1) Compiler l'interface du module Akari_solveur :
+
+       ocamlc -c akari_solveur.mli
+
+   2) Compiler le module Akari_solveur une fois défini (à chaque modification de celui-ci) :
+
+       ocamlc -c akari_solveur.ml
+
+   3) Produire un exécutable (appelé ici 'akari') :
+
+       ocamlc graphics.cma case.cmo memo.cmo bdd_base.cmo akari_solveur.cmo akari_principal.cmo -o akari
+
+   4) Lancer l'exécutable sur le fichier texte 'grille.aka',
+      contenant une grille prédéfinie :
+
+       ./akari grille.aka
+
+
+C) Développer interactivement sous l'interprète ocaml :
+   ----------------------------------------------------
+
+   Lancer l'interprète en chargeant le code des modules 'Case', 'Memo' et 'Bdd_base'
+   et en exécutant le script 'script_affichage' pour l'affichage des cases et des BDD :
+
+       ocaml case.cmo memo.cmo bdd_base.cmo -init script_affichage.ml
